@@ -1,23 +1,28 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import Layout from '../Layout/Layout';
-import Loader from '../Loader/Loader';
-import { selectAuthIsRefreshing } from '../../redux/auth/selectors';
-import { refreshUser } from '../../redux/auth/operations';
-import { Toaster } from 'react-hot-toast';
-import { lazy } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import { Suspense } from 'react';
-import PrivateRoute from '../PrivateRoute';
-import RestrictedRoute from '../RestrictedRoute';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Layout from "../Layout/Layout";
+import Loader from "../Loader/Loader";
+import { selectAuthIsRefreshing } from "../../redux/auth/selectors";
+import { refreshUser } from "../../redux/auth/operations";
+import { Toaster } from "react-hot-toast";
+import { lazy } from "react";
+import { Route, Routes } from "react-router-dom";
+import { Suspense } from "react";
+import PrivateRoute from "../PrivateRoute";
+import RestrictedRoute from "../RestrictedRoute";
+import css from "./App.module.css";
 
-const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
-const LoginPage = lazy(() => import('../../pages/LoginPage/LoginPage'));
-const ContactsPage = lazy(() => import('../../pages/ContactsPage/ContactsPage'));
-const RegistrationPage = lazy(() =>
-  import('../../pages/RegistrationPage/RegistrationPage')
+const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
+const LoginPage = lazy(() => import("../../pages/LoginPage/LoginPage"));
+const ContactsPage = lazy(() =>
+  import("../../pages/ContactsPage/ContactsPage")
 );
-const NotFoundPage = lazy(() => import('../../pages/NotFoundPage/NotFoundPage'));
+const RegistrationPage = lazy(() =>
+  import("../../pages/RegistrationPage/RegistrationPage")
+);
+const NotFoundPage = lazy(() =>
+  import("../../pages/NotFoundPage/NotFoundPage")
+);
 
 const App = () => {
   const isRefreshing = useSelector(selectAuthIsRefreshing);
@@ -28,7 +33,7 @@ const App = () => {
   }, [dispatch]);
 
   return (
-    <>
+    <div className={css.div}>
       {isRefreshing ? (
         <Loader />
       ) : (
@@ -60,7 +65,7 @@ const App = () => {
         </>
       )}
       <Toaster />
-    </>
+    </div>
   );
 };
 export default App;

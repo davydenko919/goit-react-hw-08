@@ -1,10 +1,9 @@
-import css from './UserMenu.module.css';
-import { IoLogOutOutline } from 'react-icons/io5';
-import { logout } from '../../redux/auth/operations';
-import toast from 'react-hot-toast';
+import css from "./UserMenu.module.css";
+import { logout } from "../../redux/auth/operations";
+import toast from "react-hot-toast";
 
-import { useDispatch, useSelector } from 'react-redux';
-import { selectAuthUser } from '../../redux/auth/selectors';
+import { useDispatch, useSelector } from "react-redux";
+import { selectAuthUser } from "../../redux/auth/selectors";
 
 const UserMenu = () => {
   const user = useSelector(selectAuthUser);
@@ -14,15 +13,15 @@ const UserMenu = () => {
     dispatch(logout())
       .unwrap()
       .then(() => {
-        toast.success('Logout was successful', {
+        toast.success("Logout was successful", {
           style: {
-            border: '1px solid rgb(0, 106, 255)',
-            padding: '16px',
-            color: 'rgb(0, 106, 255)',
+            border: "1px solid rgb(0, 106, 255)",
+            padding: "16px",
+            color: "rgb(0, 106, 255)",
           },
           iconTheme: {
-            primary: 'rgb(0, 226, 45)',
-            secondary: '#FFFAEE',
+            primary: "rgb(0, 226, 45)",
+            secondary: "#FFFAEE",
           },
         });
       });
@@ -30,10 +29,9 @@ const UserMenu = () => {
 
   return (
     <>
-      <p className={css.welcomeText}>Hello, {user.name}</p>
-      <button type="button" onClick={onLogout} className={css.logoutBtn}>
+      <p>Hello, {user.name}</p>
+      <button type="button" onClick={onLogout} className={css.button}>
         Logout
-        <IoLogOutOutline className={css.logoutIcon} />
       </button>
     </>
   );

@@ -1,17 +1,16 @@
-// import css from './AppBar.module.css';
-import { useSelector } from 'react-redux';
-import { selectAuthIsLoggedIn } from '../../redux/auth/selectors';
+import css from "./AppBar.module.css";
+import { useSelector } from "react-redux";
+import { selectAuthIsLoggedIn } from "../../redux/auth/selectors";
 
-import AuthNav from '../AuthNav/AuthNav';
-import Navigation from '../Navigation/Navigation';
-import UserMenu from '../UserMenu/UserMenu';
-import clsx from 'clsx';
+import AuthNav from "../AuthNav/AuthNav";
+import Navigation from "../Navigation/Navigation";
+import UserMenu from "../UserMenu/UserMenu";
+import clsx from "clsx";
 
 const AppBar = () => {
   const isLoggedIn = useSelector(selectAuthIsLoggedIn);
   return (
-    <nav >
-    {/* <nav className={clsx(isLoggedIn ? css.container : css.nav)}> */}
+    <nav className={clsx(isLoggedIn ? css.container : css.nav)}>
       <Navigation />
       {isLoggedIn ? <UserMenu /> : <AuthNav />}
     </nav>
