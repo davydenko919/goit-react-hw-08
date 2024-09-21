@@ -1,40 +1,56 @@
-import { Formik, Form, Field } from "formik";
-// import { useDispatch } from "react-redux";
-// import { register } from "../../redux/auth/operations";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { register } from "../../redux/auth/operations";
 import css from "./RegistrationForm.module.css";
 
-export default function RegistrationForm() {
-//   const dispatch = useDispatch();
+const RegistrationForm = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
 
-//   const handleSubmit = (values, actions) => {
-//     dispatch(register(values));
-//     actions.resetForm();
-//   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(register({ name, email, password }));
+  };
 
   return (
-    <Formik
-      initialValues={{
-        name: "",
-        email: "",
-        password: "",
-      }}
-    //   onSubmit={handleSubmit}
-    >
-      <Form className={css.form} autoComplete="off">
-        <label className={css.label}>
-          Username
-          <Field type="text" name="name" />
-        </label>
-        <label className={css.label}>
-          Email
-          <Field type="email" name="email" />
-        </label>
-        <label className={css.label}>
-          Password
-          <Field type="password" name="password" />
-        </label>
-        <button type="submit">Register</button>
-      </Form>
-    </Formik>
+    <form onSubmit={handleSubmit} className={css.form}>
+      <label >
+        Name
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          
+          required
+        />
+      </label>
+      <label >
+        Email
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          
+          required
+        />
+      </label>
+      <label >
+        Password
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          
+          required
+        />
+      </label>
+      <button type="submit" >
+        Register
+      </button>
+    </form>
   );
-}
+};
+
+export default RegistrationForm;

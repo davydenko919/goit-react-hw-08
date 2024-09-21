@@ -1,8 +1,9 @@
-export default function HomePage() {
-  
-    return (
-      <div>
-        <h1>Task manager welcome page</h1>
-      </div>
-    );
-  }
+const HomePage = () => {
+  return (
+    <div>
+      <h1>Welcome to Home Page</h1>
+    </div>
+  );
+};
+
+export default HomePage;

@@ -1,31 +1,46 @@
-import { Formik, Form, Field } from "formik";
-// import { useDispatch } from "react-redux";
-// import { toast } from "react-hot-toast";
-// import { logIn } from "../../redux/auth/operations";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/auth/operations";
 import css from "./LoginForm.module.css";
 
-export default function LoginForm() {
-  
+
+const LoginForm = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(login({ email, password }));
+  };
 
   return (
-    <Formik
-      initialValues={{
-        email: "",
-        password: "",
-      }}
-    //   onSubmit={handleSubmit}
-    >
-      <Form className={css.form} autoComplete="off">
-        <label className={css.label}>
-          Email
-          <Field type="email" name="email" />
-        </label>
-        <label className={css.label}>
-          Password
-          <Field type="password" name="password" />
-        </label>
-        <button type="submit">Log In</button>
-      </Form>
-    </Formik>
+    <form onSubmit={handleSubmit} className={css.form}>
+      <label >
+        Email
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          
+          required
+        />
+      </label>
+      <label >
+        Password
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          
+          required
+        />
+      </label>
+      <button type="submit" >
+        Log In
+      </button>
+    </form>
   );
-}
+};
+
+export default LoginForm;
