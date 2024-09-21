@@ -1,27 +1,51 @@
-// import PropTypes from "prop-types";
-// import { useDispatch } from "react-redux";
-// import { deleteContact } from "../../redux/contacts/operations";
+import css from './Contact.module.css';
+import { FaUser } from 'react-icons/fa';
+import { BsFillTelephoneFill } from 'react-icons/bs';
+import { MdDeleteForever } from 'react-icons/md';
+import toast from 'react-hot-toast';
 
-// const Contact = ({ id, name, number }) => {
-//   const dispatch = useDispatch();
+import { useDispatch } from 'react-redux';
+import { deleteContact } from '../../redux/contacts/operations';
 
-//   const handleDelete = () => {
-//     dispatch(deleteContact(id));
-//   };
+const Contact = ({ name, number, id }) => {
+  const dispatch = useDispatch();
+  const onDeleteContact = id => {
+    dispatch(deleteContact(id))
+      .unwrap()
+      .then(() => {
+        toast.success('Contact was deleted successfully', {
+          style: {
+            border: '1px solid rgb(0, 106, 255)',
+            padding: '16px',
+            color: 'rgb(0, 106, 255)',
+          },
+          iconTheme: {
+            primary: 'rgb(0, 226, 45)',
+            secondary: '#FFFAEE',
+          },
+        });
+      });
+  };
 
-//   return (
-//     <li>
-//       <p>Name: {name}</p>
-//       <p>Number: {number}</p>
-//       <button onClick={handleDelete}>Delete</button>
-//     </li>
-//   );
-// };
+  return (
+    <div className={css.contactContainer}>
+      <p className={css.text}>
+        <FaUser className={css.userIcon} />
+        {name}
+      </p>
+      <p className={css.text}>
+        <BsFillTelephoneFill className={css.userIcon} />
+        {number}
+      </p>
+      <button
+        className={css.deleteBtn}
+        type="button"
+        onClick={() => onDeleteContact(id)}
+      >
+        <MdDeleteForever className={css.deleteIcon} />
+      </button>
+    </div>
+  );
+};
 
-// Contact.propTypes = {
-//   id: PropTypes.string.isRequired,
-//   name: PropTypes.string.isRequired,
-//   number: PropTypes.string.isRequired,
-// };
-
-// export default Contact;
+export default Contact;

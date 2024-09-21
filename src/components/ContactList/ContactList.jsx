@@ -1,35 +1,30 @@
-import { useSelector, useDispatch } from 'react-redux'
-import { deleteContact } from '../../redux/contacts/operations'
-import { selectFilteredContacts } from '../../redux/contacts/selectors'
-import toast from 'react-hot-toast'
-
+import Contact from '../Contact/Contact';
+import { useSelector } from 'react-redux';
+import {
+  selectContacts,
+  selectFilteredContacts,
+} from '../../redux/contacts/selectors';
 
 const ContactList = () => {
-  const contacts = useSelector(selectFilteredContacts)
-  const dispatch = useDispatch()
-
-  const handleDelete = (id) => {
-    dispatch(deleteContact(id))
-      .unwrap()
-      .then(() => toast.success('Contact deleted successfully'))
-      .catch((error) => toast.error(error.message))
-  }
-
+  const filteredContacts = useSelector(selectFilteredContacts);
+  const contacts = useSelector(selectContacts);
   return (
-    <ul >
-      {contacts.map(({ id, name, number }) => (
-        <li key={id} >
-                <p>Name: {name}</p>
-                <p>Number: {number}</p>
-          <button
-            onClick={() => handleDelete(id)}
-          >
-            Delete
-          </button>
-        </li>
-      ))}
-    </ul>
-  )
-}
+    <div >
+      {contacts.length === 0 && (
+        <p >Contact list is empty. Add new contact.</p>
+      )}
+      {filteredContacts.map(contact => {
+        return (
+          <Contact
+            key={contact.id}
+            id={contact.id}
+            name={contact.name}
+            number={contact.number}
+          />
+        );
+      })}
+    </div>
+  );
+};
 
-export default ContactList
+export default ContactList;

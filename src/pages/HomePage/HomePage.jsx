@@ -1,9 +1,7 @@
-const HomePage = () => {
-  return (
-    <div>
-      <h1>Welcome to Home Page</h1>
-    </div>
-  );
+
+
+const Homepage = () => {
+  return <h1 >Contact manager welcome page</h1>;
 };
 
-export default HomePage;
+export default Homepage;

@@ -1,12 +1,11 @@
-import { Link } from "react-router-dom";
 
-export default function NotFoundPage() {
+
+const NotFoundPage = () => {
   return (
-    <div>
-      <p>Opps! Page not found! Sorry!</p>
-      <p>
-        Please visit out <Link to="/">Home page</Link>
-      </p>
+    <div >
+      <h1 >Sorry, page is not found</h1>;
     </div>
   );
-}
+};
+
+export default NotFoundPage;

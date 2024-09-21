@@ -1,12 +1,13 @@
-import AppBar from "../AppBar/AppBar";
-import css from './Layout.module.css'
+import AppBar from '../AppBar/AppBar';
 
 const Layout = ({ children }) => {
   return (
-    <div className={css.div}>
-      <AppBar />
-      <div>{children}</div>
-    </div>
+    <>
+      <header>
+        <AppBar />
+      </header>
+      {children}
+    </>
   );
 };
 
